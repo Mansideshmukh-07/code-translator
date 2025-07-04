@@ -1,0 +1,38 @@
+.global _start
+_start:
+    BL __SBR__mymul
+
+__SBR__mymul:
+
+    STR FP,#[SP ,#-8]!
+    STR LR,#[SP ,#-8]!
+    MOV FP,SP
+
+    CMP X0, X1 
+    BGT __mymul__ moreadd 
+
+    ADD X1, X1, X0
+    SUB x0, x1, x0
+    SUB x1, x1, x0
+    MOV x3, #0
+    MOV x2, #0
+    __mymul__moreadd: 
+
+    CMP x0, x1 
+    BEQ __mymul__nomoreadd 
+
+    ADD x2, x2, x0
+    ADD x3, x3, #1
+    B __mymul__moreadd 
+
+    __mymul__nomoreadd: 
+
+    B __mymul__RET
+ 
+    __mymul__RET:
+
+    MOV SP, FP
+    LDR FP, [SP], #-8
+    LDR LR, [SP], #-8
+    RET
+
