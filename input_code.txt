@@ -1,0 +1,17 @@
+ ( $mymul \n
+    ( $mymul 2  \n
+        CB X0 > X1 :moreadd \n
+        X1 +<- X0 \n
+        x0 <- x1 - x0 \n
+        x1 <- x1 - x0 \n
+        x3 <- #0  \n
+        x2 <- #0 \n
+        :moreadd \n
+        CB x0 == x1 :nomoreadd \n
+        x2 +<- x0 \n
+        x3 +<- #1 \n
+        B :moreadd \n
+        :nomoreadd \n
+        Return \n
+    ) \n
+) 
